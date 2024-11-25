@@ -30,68 +30,144 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@material-ui/icons@4.11.3/utils/createSvgIcon.min.js"></script>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: "Arsenal", sans-serif;
-        /* text-align: center; */
       }
 
-      /* Header */
+      /* Style the header */
       header {
-        position: absolute;
+        position: fixed;
         top: 0;
-        left: 0;
         width: 100%;
+        height: 85px;
+        background: rgb(106, 13, 173, 0.2);
+        z-index: 1000;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 20px 20px;
-        background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+        padding: 0 80px;
+        backdrop-filter: blur(8px);
       }
 
-      .logo img {
-        width: 60px;
-        height: auto;
+      .logo-container {
+        flex-shrink: 0;
       }
 
-      nav ul {
-        list-style: none;
+      .nav-links {
         display: flex;
+        list-style: none;
         gap: 20px;
-        margin-left: auto; /* Align navigation to the right */
+        margin: 0;
+        padding: 0;
       }
 
-      nav a {
+      .nav-links a {
         text-decoration: none;
-        color: #6a0dad;
+        color: #fff;
         font-size: 18px;
-        font-weight: bold;
-        position: relative;
       }
 
-      /* Active tab with underline matching primary color */
-      nav a.active::after {
-        content: "";
+      a.active::after {
         position: absolute;
-        bottom: -5px;
         left: 0;
         width: 100%;
         height: 2px;
         background-color: #6a0dad;
       }
 
+      .logo-container {
+        flex: 1;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      ul li {
+        display: inline;
+        margin-left: 20px;
+      }
+
+      .collapse-btn {
+        display: none;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        font-size: 28px;
+        color: white;
+      }
+
+      @media screen and (max-width: 678px) {
+        .collapse-btn {
+          display: block;
+        }
+        header {
+          padding: 0 20px;
+        }
+
+        header .menu-items {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 80px;
+          right: 0;
+          background-color: rgba(241, 241, 241, 0.7);
+          width: 100%;
+          padding: 20px 0;
+          backdrop-filter: blur(8px);
+        }
+
+        header .menu-items li a {
+          color: #6a0dad;
+        }
+
+        .active-menu {
+          display: flex !important;
+        }
+
+        .overlay {
+          width: 100% !important;
+          padding: 20px;
+        }
+
+        .service-box {
+          margin-bottom: 10px;
+        }
+
+        .about-us-content {
+          padding-right: 0 !important;
+        }
+
+        .branch-list {
+          margin-bottom: 3em !important;
+        }
+        
+        .footer-action {
+          margin-bottom: 3em !important;
+        }
+      }
       /* Hero Section */
       .hero {
-        background: url("https://bc-user-uploads.brandcrowd.com/public/media-Production/0e523b9b-df39-4929-a861-701e45a7994a/4023d658-6f31-4492-b733-11a256646539.jpg")
+        background: url("./images/img_1.jpg")
           no-repeat center center/cover;
-        height: 100vh;
+        height: 101vh;
         display: flex;
         align-items: center;
-        padding-left: 40px;
         color: #fff;
+        margin: 0;
+      }
+
+      .hero .logo {
+        width: 80px;
       }
 
       .hero h1 {
-        font-size: 48px;
+        font-size: calc(48px, 2.5vw, 20px);
         margin-bottom: 10px;
         font-weight: bold;
       }
@@ -118,21 +194,60 @@
         background-color: #5b0aa0;
       }
 
-      /* Title Styling */
+      .overlay {
+        width: 40%;
+        padding: 40px;
+      }
+
+      /* About Us Section */
+      .about-us {
+        color: #6a0dad;
+        width: 100%;
+        text-align: center;
+        background-color: #eae2f5;
+        padding: 20px !important;
+      }
+
+      .about-us-content {
+        padding-right: 50px ;
+      }
+
+      .service-box {
+        padding: 20px !important; /* Use !important for service box padding */
+      }
+
+      .mission-box {
+        padding: 20px !important; /* Use !important for mission box padding */
+      }
+
+      .welcoming {
+        min-height: 600px;
+      }
+
+      .welcoming h2 {
+        font-size: 28px;
+        line-height: 1.3;
+        font-weight: bolder;
+        position: relative;
+        left: 5%;
+      }
+
+      /* Services Section */
       .services-title {
         font-size: 2.5rem;
         color: #6a0dad;
         font-weight: bold;
         margin-bottom: 30px;
       }
-      /* Service Icon Styling */
+
       .service-icon {
         width: 70px;
         height: 70px;
-        fill: #6a0dad;
-        margin-bottom: 15px;
+        filter: brightness(0) saturate(100%) invert(12%) sepia(59%)
+          saturate(7258%) hue-rotate(276deg) brightness(80%) contrast(104%);
+        margin-bottom: 8px;
       }
-      /* Service Box Styling */
+
       .service-box {
         display: flex;
         flex-direction: column;
@@ -145,25 +260,20 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         padding-inline: 15px;
       }
-      .service-icon {
-        width: 70px;
-        height: 70px;
-        filter: brightness(0) saturate(100%) invert(12%) sepia(59%)
-          saturate(7258%) hue-rotate(276deg) brightness(80%) contrast(104%);
-        margin-bottom: 8px;
-      }
+
       .service-box:hover {
         transform: translateY(-8px);
         box-shadow: 5px 5px 15px rgba(211, 211, 211, 0.2),
           -5px -5px 15px rgba(241, 241, 241, 0.95);
       }
-      /* Heading and Text Styling */
+
       .service-box h3 {
         font-size: 1.6rem;
         color: #6a0dad;
         font-weight: bold;
         margin-top: 15px;
       }
+
       .service-box p {
         color: #6a0dad;
         font-size: 18px;
@@ -171,53 +281,84 @@
         font-family: "Hind Madurai", sans-serif;
         flex-grow: 1;
       }
+
       /* Mission Box Styling */
-      .purple-bg {
-        background-color: #6a0dad;
-        color: #fff;
-      }
       .mission-box {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
       }
+
       .mission-heading {
         font-size: 2rem;
         font-weight: bold;
-        padding-top: 9px;
+        /* padding-top: 9px; */
       }
+
       .mission-icon-box img {
         width: 100%;
+        height: 100%;
         object-fit: cover;
-        padding-block: 15px;
+        /* padding-block: 15px; */
       }
+
+      .content-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 73px; /* Ensure consistent padding for both sections */
+        text-align: center;
+        background-color: #6a0dad;
+      }
+
       .mission p {
         font-size: 18px;
-        line-height: 1.5;
+        /* line-height: 1.5; */
       }
-      /* Footer Styling */
-      .footer {
-        background: linear-gradient(135deg, #6a0dad, #932ddc);
-        padding: 40px 0;
-        color: white; /* Change text color for better visibility */
-      }
-      .footer a {
-        color: #fff; /* Change link color to white */
-      }
-      .footer .btn-book {
+
+      .purple-bg {
         background-color: #6a0dad;
-        color: white;
-        border-radius: 10px;
-        border: 1px solid white;
-        font-size: 22px;
+        color: #fff;
       }
-      .footer .btn-book:hover {
-        background-color: #5b0aa0;
+
+      /* Footer */
+      .footer {
+        background: linear-gradient(135deg, #c093e0, #ce8ffb);
+        padding: 40px 0;
+        color: white;
+      }
+
+      .footer a {
+        color: #fff;
+      }
+
+      .footer .btn-book {
+        background: #fff;
+        color: #6a0dad;
+        border-radius: 25px;
+        padding: 12px 35px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
       }
 
       .contact-details-list {
         list-style: none;
+        margin: 0 !important;
+      }
+
+      .contact-details-list li {
+        display: block;
+      }
+
+      .contact-details-list li i {
+        margin-right: 10px;
+      }
+
+      .branch-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
       }
 
       .footer .branch-list li {
@@ -241,34 +382,24 @@
         font-size: 0.9rem;
         color: #333;
       }
-
-      .welcoming {
-        min-height: 600px;
-      }
-
-      .welcoming h2 {
-        font-size: 28px;
-        line-height: 1.3;
-        font-weight: bolder;
-        position: relative;
-        left: 5%;
-      }
     </style>
   </head>
   <body>
     <section class="hero">
-      <header>
-        <div class="logo">
-          <img src="./images/logo.png" alt="Clinic Logo" />
+       <header>
+        <div class="logo-container">
+          <a href="#home"
+            ><img src="./images/l4.png" class="logo" alt="Clinic Logo"
+          /></a>
         </div>
-        <nav>
-          <ul>
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </nav>
+        <button class="collapse-btn"><i class="bi bi-list"></i></button>
+        <ul class="nav-links menu-items">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </header>
       <div class="overlay">
         <h1>Women's Health Clinic</h1>
@@ -460,5 +591,16 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      $(document).ready(function () {
+          $('.collapse-btn').click(function () {
+              if ($('.nav-links').hasClass('active-items')) {
+                $('.nav-links').removeClass('active-items');
+              } else {
+                $('.nav-links').addClass('active-items');
+              }
+          });
+        });
+    </script>
   </body>
 </html>
