@@ -45,11 +45,12 @@
         top: 0;
         width: 100%;
         height: 85px;
-        background: rgba(194, 193, 193, 0.7);
+        
+        background: rgb(106, 13, 173, 0.2);
         z-index: 1000;
         display: flex;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 80px;
         backdrop-filter: blur(8px);
       }
 
@@ -69,44 +70,75 @@
         text-decoration: none;
         color: #6a0dad;
         font-size: 18px;
-        font-weight: bold;
       }
 
-      nav a.active::after {
+      a.active::after {
         position: absolute;
         left: 0;
         width: 100%;
         height: 2px;
         background-color: #6a0dad;
       }
-      header {
-        padding: 0 20px;
-      }
 
       .logo-container {
         flex: 1;
       }
 
-      nav ul {
+      ul {
         margin: 0;
         padding: 0;
         list-style: none;
       }
 
-      nav ul li {
+      ul li {
         display: inline;
         margin-left: 20px;
       }
+
+      .collapse-btn {
+        display: none;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        font-size: 28px;
+        color: white;
+      }
+
+      @media screen and (max-width: 678px) {
+        .collapse-btn {
+          display: block;
+        }
+        header {
+          padding: 0 20px;
+        }
+
+        header .menu-items {
+          display: none;
+        }
+
+        .overlay {
+          width: 100% !important;
+          padding: 20px;
+        }
+
+        .service-box {
+          margin-bottom: 10px;
+        }
+
+        .about-us-content {
+          padding-right: 0 !important;
+        }
+        
+      }
       /* Hero Section */
       .hero {
-        background: url("./images/4023d658-6f31-4492-b733-11a256646539.jpg")
+        background: url("./images/img_2.webp")
           no-repeat center center/cover;
         height: 101vh;
         display: flex;
         align-items: center;
-        /* padding-left: 40px; */
         color: #fff;
-        margin-bottom: -50px;
+        margin: 0;
       }
 
       .hero .logo {
@@ -114,7 +146,7 @@
       }
 
       .hero h1 {
-        font-size: 48px;
+        font-size: calc(48px, 2.5vw, 20px);
         margin-bottom: 10px;
         font-weight: bold;
       }
@@ -143,7 +175,7 @@
 
       .overlay {
         width: 40%;
-        margin-left: 5%;
+        padding: 40px;
       }
 
       /* About Us Section */
@@ -156,7 +188,7 @@
       }
 
       .about-us-content {
-        padding-right: 50px !important;
+        padding-right: 50px ;
       }
 
       .service-box {
@@ -324,15 +356,14 @@
             ><img src="./images/l4.png" class="logo" alt="Clinic Logo"
           /></a>
         </div>
-        <nav class="ms-auto">
-          <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#mission">Mission</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
+        <button class="collapse-btn"><i class="bi bi-list"></i></button>
+        <ul class="nav-links menu-items">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </header>
       <div class="overlay">
         <h1>Comprehensive Care for Women's Wellness</h1>
@@ -432,7 +463,7 @@
         </div>
       </div>
     </div>
-    <section
+    <!-- <section
       class="my-5 content-section mission purple-bg text-center"
       id="mission"
     >
@@ -465,7 +496,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- <div class="my-5 container mission purple-bg text-center" id="mission">
       <div class="row text-center">
         <div class="col-md-6">
