@@ -323,8 +323,8 @@ crossorigin="anonymous" />
             <label class="form-check-label" for="gynecology">Gynecology</label>
           </div>
           <div class="form-check form-check-inline">
-            <input type="radio" id="menopause" name="service" value="Menopause" class="form-check-input" />
-            <label class="form-check-label" for="menopause">Menopause</label>
+            <input type="radio" id="maternity" name="service" value="Maternity" class="form-check-input" />
+            <label class="form-check-label" for="maternity">Maternity</label>
           </div>
         </div>
 
@@ -393,38 +393,36 @@ crossorigin="anonymous" />
       event.preventDefault();
 
       const formData = {
-    name: document.getElementById('name').value,
-    contactNumber: document.getElementById('contactNumber').value,
-    email: document.getElementById('email').value,
-    service: document.querySelector('input[name="service"]:checked') ? document.querySelector('input[name="service"]:checked').value : null,
-    branch: document.getElementById('branch').value,
-    preferredDate: document.getElementById('preferredDate').value,
-    alternateDate: document.getElementById('alternateDate').value,
-    message: document.getElementById('message').value,
-    medicalAid: document.getElementsByName('medicalAid').value,
-    medicalAidProvider: document.getElementById('medicalAidProvider').value || "N/A",
-    medicalAidNumber: document.getElementById('medicalAidNumber').value || "N/A"
-};
+        name: document.getElementById('name').value || "N/A",
+        contactNumber: document.getElementById('contactNumber').value || "N/A",
+        email: document.getElementById('email').value || "N/A",
+        service: document.querySelector('input[name="service"]:checked') ? document.querySelector('input[name="service"]:checked').value : "N/A",
+        branch: document.getElementById('branch').value || "N/A",
+        preferredDate: document.getElementById('preferredDate').value || "N/A",
+        alternateDate: document.getElementById('alternateDate').value || "N/A",
+        message: document.getElementById('message').value || "N/A",
+        medicalAid: document.querySelector('input[name="medicalAid"]:checked') ? document.querySelector('input[name="medicalAid"]:checked').value : "N/A",
+        medicalAidProvider: document.getElementById('medicalAidProvider').value || "N/A",
+        medicalAidNumber: document.getElementById('medicalAidNumber').value || "N/A"
+    };
 
-
-
-      fetch('https://olibreyrqumlnj2lqugp4youiy0rlxgo.lambda-url.af-south-1.on.aws/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+    fetch('https://olibreyrqumlnj2lqugp4youiy0rlxgo.lambda-url.af-south-1.on.aws/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'Email sent successfully') {
+          alert('Appointment request sent successfully, a consultant will contact you with confirmation.');
+          document.getElementById('appointmentForm').reset();
+        } else {
+          alert('An error occured while sending the booking details. Please try again.');
+        }
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data.message === 'Email sent successfully') {
-            alert('Appointment request sent successfully!');
-            document.getElementById('appointmentForm').reset();
-          } else {
-            alert('Failed to send appointment request.');
-          }
-        })
-        .catch(error => console.error('Error:', error));
+      .catch(error => {console.error('Error:', error); alert("An error occured while sending the booking details. Please try again.")});
     });
   </script>
 
